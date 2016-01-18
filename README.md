@@ -22,7 +22,7 @@ For centos7 you can find the livecd-tools here: http://people.centos.org/arrfab/
 
 Install a build machine (you can use vagrant):
 
-`vagrant init "vStone/centos-7.x-puppet.3.x" && vagrant up`
+`vagrant init "vStone/centos-7.x-puppet.3.x" && vagrant up && vagrant ssh`
 
 Add epel:
 
@@ -64,6 +64,37 @@ python buildANSOS.py -Bc -e https://repos.fedorapeople.org/repos/openstack/opens
 This will build ANSOS-NG iso image based on Archipel git master and openVswitch from RDO repositories.
 
 You can customize a lot of things just check with `python buildANSOS.py -h`.
+
+### Troubleshooting
+If you receive error messages such as
+```bash
+perl: warning: Falling back to the standard locale ("C").
+perl: warning: Setting locale failed.
+perl: warning: Please check that your locale settings:
+	LANGUAGE = (unset),
+	LC_ALL = (unset),
+	LC_CTYPE = "de_DE.UTF-8",
+	LANG = "de_DE.UTF-8"
+    are supported and installed on your system.
+```
+and
+```bash
+cp: cannot stat '/home/vagrant/rpmbuild/RPMS/x86_64/*': No such file or directory
+WARNING: Wrong return code for cp /home/vagrant/rpmbuild/RPMS/x86_64/* /home/vagrant/REPO/RPMS/x86_64/
+```
+and 
+```bash
+UnicodeEncodeError: 'ascii' codec can't encode character u'\xfc' in position 143: ordinal not in range(128)
+sed: can't read /home/vagrant/CACHE/ANSOS-creator-x86_64-tmp/archipel-node-image.ks.tmp: No such file or directory
+```
+set your locale environment variables to the following before connecting to the virtual machine:
+```bash
+LANG="en_US.UTF-8"
+export LANG
+LC_ALL="en_US.UTF-8"
+export LC_ALL
+vagrant ssh
+```
 
 ### Docker build - beta
 An attempt to use docker in order to build images can be found in docker folder. For now it doesn't work due to:
