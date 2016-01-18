@@ -47,12 +47,12 @@ yum install http://dl.fedoraproject.org/pub/epel/6/i386/appliance-tools-minimize
 Install missing dependencies:
 
 ```bash
-yum install install wget livecd-tools appliance-tools-minimizer fedora-packager python-devel rpm-build createrepo selinux-policy-doc checkpolicy selinux-policy-devel autoconf automake python-mock python-lockfile
+yum install install wget livecd-tools appliance-tools-minimizer fedora-packager python-devel rpm-build createrepo selinux-policy-doc checkpolicy selinux-policy-devel autoconf automake python-mock python-lockfile git
 ```
 
 Enable selinux:
 
-Edit `/etc/sysconfig/selinux`, set it to enforcing and reboot.
+Edit `/etc/sysconfig/selinux`, set it to enforcing (if it isn't already) and reboot.
 
 And finally run:
 
